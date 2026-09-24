@@ -1,0 +1,58 @@
+# ==============================================================================
+# MONOREPO ROOT & PACKAGE MANAGERS (pnpm)
+# ==============================================================================
+node_modules/
+**/node_modules/
+.pnpm-debug.log*
+
+# ==============================================================================
+# ENVIRONMENT VARIABLES & CREDENTIALS (Security)
+# ==============================================================================
+.env
+.env.local
+.env.*.local
+*.env
+*.pem
+
+# ==============================================================================
+# FRONTEND: REACT + VITE SPECIFIC
+# ==============================================================================
+# Vite production build outputs
+frontend/dist/
+frontend/dist-ssr/
+
+# Vite internal cache and package manager logs
+frontend/.vite/
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/pnpm-debug.log*
+
+# ==============================================================================
+# BACKEND: NODE.JS + EXPRESS SPECIFIC
+# ==============================================================================
+# TypeScript compilation and build outputs
+backend/dist/
+backend/build/
+backend/out/
+
+# Node.js runtime logs
+backend/logs/
+backend/*.log
+backend/npm-debug.log*
+
+# ==============================================================================
+# TYPESCRIPT, LINTERS, & BUILD CACHES
+# ==============================================================================
+*.tsbuildinfo
+.eslintcache
+.prettiercache
+.turbo/
+
+# ==============================================================================
+# SYSTEM & IDE FILES
+# ==============================================================================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

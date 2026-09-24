@@ -1,0 +1,146 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum BookingStatus {
+  PENDING_PAYMENT
+  CONFIRMED
+  CANCELLED
+}
+
+enum PaymentAttemptStatus {
+  PENDING
+  SUCCESSFUL
+  FAILED
+}
+
+model Role {
+  id    Int        @id @default(autoincrement())
+  name  String
+  users UserRole[]
+
+  @@map("roles")
+}
+
+model User {
+  id             Int             @id @default(autoincrement())
+  email          String          @unique
+  password_hash  String
+  roles          UserRole[]
+  parent_profile ParentProfile?
+  
+  @@map("users")
+}
+
+model UserRole {
+  user_id Int
+  role_id Int
+  user    User @relation(fields: [user_id], references: [id])
+  role    Role @relation(fields: [role_id], references: [id])
+
+  @@id([user_id, role_id])
+  @@map("user_roles")
+}
+
+model ParentProfile {
+  id           Int              @id @default(autoincrement())
+  user_id      Int              @unique
+  full_name    String
+  phone_number String
+  user         User             @relation(fields: [user_id], references: [id])
+  children     StudentProfile[]
+
+  @@map("parent_profiles")
+}
+
+model StudentProfile {
+  id           Int            @id @default(autoincrement())
+  user_id      Int            @unique
+  parent_id    Int?
+  student_name String
+  birth_date   DateTime       @db.Date
+  parent       ParentProfile? @relation(fields: [parent_id], references: [id])
+  bookings     Booking[]
+
+  @@map("student_profiles")
+}
+
+model SystemSetting {
+  key         String  @id
+  value       String
+  description String?
+
+  @@map("system_settings")
+}
+
+model Subject {
+  id          Int                  @id @default(autoincrement())
+  name        String
+  description String?
+  price       Decimal              @db.Decimal(10, 2)
+  templates   TrialClassTemplate[]
+  classes     TrialClass[]
+
+  @@map("subjects")
+}
+
+model TrialClassTemplate {
+  id                   Int          @id @default(autoincrement())
+  subject_id           Int
+  day_of_week          Int
+  start_time_of_day    DateTime     @db.Time
+  end_time_of_day      DateTime     @db.Time
+  default_max_capacity Int          @default(4)
+  subject              Subject      @relation(fields: [subject_id], references: [id], onDelete: Cascade)
+  classes              TrialClass[]
+
+  @@map("trial_class_templates")
+}
+
+model TrialClass {
+  id             Int                 @id @default(autoincrement())
+  template_id    Int?
+  subject_id     Int
+  start_time     DateTime            @db.Timestamptz
+  end_time       DateTime            @db.Timestamptz
+  max_capacity   Int                 @default(4)
+  current_booked Int                 @default(0)
+  template       TrialClassTemplate? @relation(fields: [template_id], references: [id], onDelete: SetNull)
+  subject        Subject             @relation(fields: [subject_id], references: [id], onDelete: Restrict)
+  bookings       Booking[]
+
+  @@unique([template_id, start_time])
+  @@map("trial_classes")
+}
+
+model Booking {
+  id               Int              @id @default(autoincrement())
+  student_id       Int
+  trial_classes_id Int
+  status           BookingStatus    @default(CONFIRMED)
+  booked_at        DateTime         @default(now()) @db.Timestamptz
+  student          StudentProfile   @relation(fields: [student_id], references: [id])
+  trial_class      TrialClass       @relation(fields: [trial_classes_id], references: [id], onDelete: Restrict)
+  payments         PaymentAttempt[]
+
+  @@unique([student_id, trial_classes_id])
+  @@map("bookings")
+}
+
+model PaymentAttempt {
+  id                    Int       @id @default(autoincrement())
+  booking_id            Int
+  amount                Decimal   @db.Decimal(12, 2)
+  payment_method        String?
+  status                PaymentAttemptStatus
+  transaction_reference String?   @unique
+  created_at            DateTime  @default(now()) @db.Timestamptz
+  paid_at               DateTime? @db.Timestamptz
+  booking               Booking   @relation(fields: [booking_id], references: [id], onDelete: Restrict)
+
+  @@map("payment_attempts")
+}

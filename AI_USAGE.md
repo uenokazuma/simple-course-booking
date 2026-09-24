@@ -1,0 +1,62 @@
+# 🤖 AI Usage Documentation (`AI_USAGE.md`)
+
+This document outlines how artificial intelligence tools were leveraged, corrected, and evaluated during the 4-hour development window of this project.
+
+---
+
+## 🛠️ AI Tools Used
+
+* **Google Antigravity:** Used as the agentic workspace IDE to orchestrate the monorepo architecture, handle package configurations, and spin up boilerplate servers.
+* **Kilo AI:** Leveraged to convert regular JavaScript code into TypeScript.
+* **GitHub Copilot:** Used directly inside the code editor for real-time inline code autocompletion and fast syntax generation.
+* **Google Search (AI Mode / Gemini Search):** Used for quick documentation lookups, diagnosing environment errors, and verifying framework practices.
+
+---
+
+## 🎯 What AI Was Used For
+
+AI assistance was deeply integrated across the entire lifecycle of the development process:
+* **Boilerplate Generation:** Generated the primary system configurations, routing paths, Prisma schema structure, Tailwind utility styles, and core UI layouts.
+* **Logic Implementation:** Crafted the internal state filters for the parent dashboard and standard token extraction helpers for the API layer.
+* **Documentation Structuring:** Assisted in organizing technical notes and drafting comprehensive documentation logs.
+
+---
+
+## ⚡ Where AI Helped Move Faster
+
+AI was instrumental across almost the entire development loop, significantly accelerating the setup phase:
+* **Eliminating Boilerplate Friction:** Generating multi-file scaffolding (Express routes, Axios interceptors, Prisma connections, and Tailwind components) usually requires manual copying and configuration. The AI agents handled this instantly, allowing the entire full-stack skeleton to run successfully within the first hour. This allowed the focus to shift entirely onto fine-tuning specific business logic constraints rather than typing configuration scripts.
+
+---
+
+## 🛑 Disagreements, Corrections, and Rejections
+
+While the AI was helpful, several critical design outputs were rejected or corrected to safeguard the architecture and match the product requirements:
+
+1. **Database Architecture Rejection (Core Models):** 
+   * *AI Output:* The AI initially generated a flat, single-table design where subjects, and scheduling variables were packed together inside the core `trial_classes` model.
+   * *Correction:* This was rejected to maintain basic normalization standards. The schema was refactored into three separated models (`subject`, `trial_class_templates` for automated weekly projections, and `trial_classes`) to ensure high schema scalability.
+2. **Booking Flow & Component Filtering Correction:** 
+   * *AI Output:* The frontend wizard suggested starting the process by choosing the class subject first, using a generic date/time picker.
+   * *Correction:* The logic was corrected to strictly enforce a date-first approach. The date selector drives the UI, dynamically loading corresponding active trial time slots from the database, followed by specific subject and student mappings.
+3. **Language and Type Safety Correction (TypeScript Enforcement):** 
+   * *AI Output:* The AI agent initially generated several backend routes and controller files using standard JavaScript.
+   * *Correction:* Identified that the prompt instructions forgot to explicitly dictate TypeScript for the backend. Promptly corrected the agent by providing a strict constraint to refactor all existing backend code into TypeScript and enforce proper type safety definitions.
+
+
+---
+
+## 🔄 What to Change About the AI Workflow Next Time
+
+If this project were executed again, the following adjustments would be made from the very first prompt block to maximize efficiency:
+* **Explicit Tech Stack Initialization:** Always explicitly dictate the language constraints (e.g., specifying TypeScript instead of letting the AI default to standard JavaScript) in the initial system setup prompt. This ensures the agent sets up the correct file extensions (`.ts` / `.tsx`) and type definitions immediately, preventing time spent on manual code refactoring later.
+* **Pre-Configured Package Manager Rules:** When working with modern package managers like `pnpm`, explicitly instruct the AI to pass non-interactive installation flags or automatically append trusted packages (like `esbuild`, `msgpackr-extract`, and `workerd`) to the `onlyBuiltDependencies` whitelist inside `package.json`. This completely avoids the background agent freezing on interactive terminal build scripts.
+
+
+---
+
+## 🔍 How the Final Implementation Was Verified
+
+The solution was strictly validated without relying blindly on AI assertions:
+* **Manual Integration Testing:** Personally logged in as both the pre-seeded `PARENT` and `STUDENT` roles, validated the dashboard data isolation bounds for each interface, walked through the dynamic date-to-time form wizard, and initiated a checkout request.
+* **Code Review & Auditing:** Hand-audited the critical business logic layers generated by the AI—specifically the booking operations and payment handling flows—to guarantee clean, readable syntax, proper security practices, and adherence to standard naming conventions.

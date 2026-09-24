@@ -1,0 +1,80 @@
+.app-shell { min-height: 100svh; display: flex; background: #f7f5ef; }
+.sidebar { width: 255px; min-height: 100svh; display: flex; flex-direction: column; padding: 28px 22px; background: #1d2b2a; color: #f6f0df; }
+.brand-mark { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 12px; background: var(--yellow); color: var(--ink); font-family: Georgia, serif; font-size: 24px; font-weight: 700; }
+.brand-copy { margin-top: 16px; display: flex; flex-direction: column; gap: 2px; }
+.brand-copy strong { font: 700 22px Georgia, serif; }
+.brand-copy span, .user-summary small { color: #9eb7ab; font-size: 12px; }
+.sidebar-nav { display: grid; gap: 8px; margin-top: 64px; }
+.sidebar-nav a { padding: 12px 14px; border-radius: 8px; color: #b4c7bd; text-decoration: none; font-size: 14px; }
+.sidebar-nav a.active, .sidebar-nav a:hover { background: #315248; color: #fffdf8; }
+.sidebar-footer { margin-top: auto; display: grid; gap: 18px; }
+.user-summary { display: flex; align-items: center; gap: 10px; }
+.user-summary > span:last-child { display: grid; gap: 3px; overflow: hidden; }
+.user-summary strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px; }
+.avatar { width: 32px; height: 32px; display: grid; flex: 0 0 auto; place-items: center; border-radius: 50%; background: var(--yellow); color: var(--ink); font-weight: 700; }
+.avatar.large { width: 46px; height: 46px; font-size: 18px; }
+.main-content { width: calc(100% - 255px); min-width: 0; }
+.page { width: min(1080px, 100%); margin: 0 auto; padding: 62px clamp(24px, 5vw, 76px); }
+.page-header { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 44px; }
+.page-header h1, .auth-art h1 { max-width: 680px; margin: 9px 0 10px; color: var(--ink); font: 400 clamp(38px, 5vw, 68px)/.98 Georgia, serif; letter-spacing: -2px; }
+.page-header p, .auth-art p, .section-heading p { margin: 0; color: var(--muted); }
+.eyebrow { color: var(--coral); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; }
+.date-stamp { color: var(--muted); font-size: 13px; white-space: nowrap; }
+.dashboard-actions { display: grid; justify-items: end; gap: 14px; }
+.dashboard-actions .button { text-decoration: none; font-size: 12px; }
+.stats-row { display: grid; grid-template-columns: repeat(3, 1fr); border-block: 1px solid var(--line); margin-bottom: 50px; }
+.stats-row > div { padding: 20px 22px; border-right: 1px solid var(--line); }
+.stats-row > div:last-child { border: 0; }
+.stats-row span { display: block; color: var(--muted); font-size: 12px; margin-bottom: 8px; }
+.stats-row strong { color: var(--ink); font: 400 27px Georgia, serif; }
+.section-heading { margin-bottom: 24px; }
+.section-heading h2 { margin: 8px 0; color: var(--ink); font: 400 30px/1.05 Georgia, serif; }
+.student-list { display: grid; gap: 14px; }
+.student-row { display: grid; grid-template-columns: minmax(210px, .65fr) 1fr; gap: 25px; padding: 20px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); }
+.student-info { display: flex; align-items: center; gap: 13px; }
+.student-info h3 { margin: 0 0 4px; font: 400 20px Georgia, serif; }
+.student-info p, .muted { margin: 0; color: var(--muted); font-size: 12px; }
+.booking-list { display: grid; gap: 8px; }
+.booking-item { display: grid; gap: 6px; padding: 10px 12px; background: #f0f5ef; border-radius: 6px; font-size: 13px; }
+.booking-item small { color: var(--muted); font-size: 11px; }
+.booking-item .button { justify-self: start; margin-top: 3px; }
+.booking-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
+.section-panel { padding: 26px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); }
+.field { display: grid; gap: 7px; margin-bottom: 20px; color: var(--ink); font-size: 12px; font-weight: 700; }
+.field input, .field select { width: 100%; border: 1px solid #cfdad1; border-radius: 6px; padding: 12px; color: var(--ink); background: #fff; outline: none; }
+.field input:focus, .field select:focus { border-color: var(--green); box-shadow: 0 0 0 3px #d9eee3; }
+.field-error { color: #bd4e3b; font-weight: 400; }
+.time-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.time-slot { padding: 11px 6px; border: 1px solid var(--line); border-radius: 6px; color: var(--ink); background: #fff; font-size: 12px; }
+.time-slot:hover, .time-slot.selected { border-color: var(--green); background: var(--mint); color: var(--green); }
+.button { border: 0; border-radius: 6px; padding: 12px 18px; font-weight: 700; transition: transform .18s, background .18s; }
+.button:hover:not(:disabled) { transform: translateY(-1px); }
+.button:disabled { cursor: wait; opacity: .6; }
+.button-primary { background: var(--green); color: #fff; }
+.button-secondary { background: var(--yellow); color: var(--ink); }
+.button-quiet { padding: 4px 0; background: transparent; color: #b4c7bd; font-size: 12px; text-align: left; }
+.booking-summary { display: grid; gap: 4px; margin: 4px 0 18px; padding: 12px; background: #f0f5ef; color: var(--green); font-size: 12px; }
+.booking-summary strong { color: var(--ink); }
+.confirmation-card { max-width: 720px; }
+.confirmation-status { display: flex; align-items: center; gap: 14px; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+.status-mark { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 50%; background: var(--mint); color: var(--green); font-weight: 700; }
+.confirmation-status h2 { margin: 6px 0 0; color: var(--ink); font: 400 28px Georgia, serif; }
+.confirmation-details { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; margin: 24px 0; background: var(--line); border: 1px solid var(--line); }
+.confirmation-details div { padding: 16px; background: var(--paper); }
+.confirmation-details dt { margin-bottom: 7px; color: var(--muted); font-size: 11px; }
+.confirmation-details dd { margin: 0; color: var(--ink); font-size: 14px; font-weight: 700; }
+.confirmation-actions { display: flex; align-items: center; gap: 18px; }
+.text-button { padding: 0; border: 0; background: transparent; color: var(--green); font-size: 12px; font-weight: 700; }
+.form-message { margin: 0 0 16px; padding: 10px 12px; border-radius: 6px; font-size: 12px; }
+.form-message.error { background: #fff0ec; color: #a44434; }
+.form-message.success { background: var(--mint); color: var(--green); }
+.loading-state, .empty-state { padding: 34px 0; color: var(--muted); }
+.empty-state h2 { margin-bottom: 6px; color: var(--ink); font: 400 25px Georgia, serif; }
+.auth-page { min-height: 100svh; display: grid; grid-template-columns: 1.1fr .9fr; background: var(--paper); }
+.auth-art { display: flex; flex-direction: column; justify-content: center; padding: clamp(34px, 8vw, 110px); background: var(--mint); }
+.auth-art p { max-width: 390px; line-height: 1.6; }
+.art-note { width: fit-content; margin-top: 60px; padding: 14px 18px; border-left: 3px solid var(--coral); color: var(--green); font: italic 17px Georgia, serif; }
+.auth-form { width: min(390px, calc(100% - 48px)); align-self: center; justify-self: center; }
+.auth-form .button { width: 100%; margin-top: 4px; }
+.secure-note { display: block; margin-top: 14px; color: var(--muted); font-size: 11px; text-align: center; }
+@media (max-width: 760px) { .app-shell { display: block; } .sidebar { width: 100%; min-height: auto; padding: 18px 20px; display: grid; grid-template-columns: auto 1fr; gap: 0 12px; } .brand-mark { grid-row: span 2; } .brand-copy { margin: 0; align-self: center; } .sidebar-nav { grid-column: 1 / -1; display: flex; margin-top: 18px; } .sidebar-nav a { flex: 1; text-align: center; } .sidebar-footer { display: none; } .main-content { width: 100%; } .page { padding: 42px 20px; } .page-header { display: block; margin-bottom: 32px; } .dashboard-actions { justify-items: start; margin-top: 18px; } .date-stamp { margin-top: 0; } .stats-row { margin-bottom: 34px; } .stats-row > div { padding: 14px 10px; } .stats-row strong { font-size: 21px; } .student-row, .booking-grid { grid-template-columns: 1fr; } .confirmation-details { grid-template-columns: 1fr; } .confirmation-actions { align-items: stretch; flex-direction: column; } .confirmation-actions .button, .confirmation-actions .text-button { width: 100%; text-align: center; } .auth-page { grid-template-columns: 1fr; } .auth-art { min-height: 46svh; padding: 42px 24px; } .auth-art h1 { font-size: 48px; } .art-note { margin-top: 28px; } .auth-form { padding: 44px 0; } }
